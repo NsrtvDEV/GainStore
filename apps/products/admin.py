@@ -1,16 +1,17 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from .models import Category, Product, ProductImage, Review, Like
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ("name", "slug", "parent")
     search_fields = ("name", "slug")
     ordering = ("name",)
 
 
-class ProductImageInline(admin.TabularInline):
+class ProductImageInline(TabularInline):
     """Позволяет добавлять фото товара прямо на странице товара"""
 
     model = ProductImage
@@ -19,7 +20,7 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ModelAdmin):
     list_display = (
         "name",
         "category",
@@ -60,14 +61,14 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
+class ProductImageAdmin(ModelAdmin):
     list_display = ("product", "url", "is_main", "sort_order")
     list_filter = ("is_main",)
     search_fields = ("product__name",)
 
 
 @admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
+class ReviewAdmin(ModelAdmin):
     list_display = ("product", "user", "rating", "created_at")
     list_filter = ("rating",)
     search_fields = ("product__name", "user__phone")
@@ -76,7 +77,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @admin.register(Like)
-class LikeAdmin(admin.ModelAdmin):
+class LikeAdmin(ModelAdmin):
     list_display = ("user", "product", "created_at")
     search_fields = ("user__phone", "product__name")
     ordering = ("-created_at",)

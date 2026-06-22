@@ -1,9 +1,10 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 
 from .models import Cart, CartItem
 
 
-class CartItemInline(admin.TabularInline):
+class CartItemInline(TabularInline):
     """Показывает товары прямо внутри корзины"""
 
     model = CartItem
@@ -13,7 +14,7 @@ class CartItemInline(admin.TabularInline):
 
 
 @admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
+class CartAdmin(ModelAdmin):
     list_display = ("id", "user", "session_id", "created_at")
     search_fields = ("user__phone", "session_id")
     ordering = ("-created_at",)
@@ -22,7 +23,7 @@ class CartAdmin(admin.ModelAdmin):
 
 
 @admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
+class CartItemAdmin(ModelAdmin):
     list_display = ("cart", "product", "quantity", "created_at")
     search_fields = ("cart__user__phone", "product__name")
     ordering = ("-created_at",)
