@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from drf_spectacular.utils import extend_schema
 
@@ -14,6 +15,7 @@ from apps.users.serializers import (
     SendOtpSerializer,
     VerifyOtpSerializer,
     UserSerializer,
+    UserUpdateSerializer,
 )
 from apps.users.utils import send_sms, generate_code, get_balance
 
@@ -128,3 +130,15 @@ class BalanceAPIView(APIView):
     def get(self, request):
         balance = get_balance()
         return Response(balance)
+
+
+class UserProfileUpdateAPIView(UpdateAPIView):
+    serializer_class = UserUpdateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        kwargs["partial"] = True
+        return super().update(request, *args, **kwargs)

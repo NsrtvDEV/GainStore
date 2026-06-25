@@ -24,6 +24,6 @@ class CartAdmin(ModelAdmin):
 
 @admin.register(CartItem)
 class CartItemAdmin(ModelAdmin):
-    list_display = ("cart", "product", "quantity", "created_at")
+    list_display = ("id","cart", "product", "quantity", "created_at")
     search_fields = ("cart__user__phone", "product__name")
     ordering = ("-created_at",)

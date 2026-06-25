@@ -7,6 +7,7 @@ from .models import User, OtpCode, Address
 
 class UserAdmin(ModelAdmin, BaseUserAdmin):
     list_display = (
+        "id",
         "phone",
         "first_name",
         "last_name",

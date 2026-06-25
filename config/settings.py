@@ -1,9 +1,8 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
-
-from .jazzmin_conf import JAZZMIN_SETTINGS  # noqa
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -172,4 +171,9 @@ UNFOLD = {
             "950": "5 46 22",
         },
     },
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME":  timedelta(minutes=30),   
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),      
 }

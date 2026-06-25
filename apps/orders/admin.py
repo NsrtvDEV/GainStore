@@ -37,6 +37,7 @@ class OrderAdmin(ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemAdmin(ModelAdmin):
     list_display = (
+        "id",
         "order",
         "product",
         "quantity",
