@@ -9,6 +9,10 @@ from .views import (
     BalanceAPIView,
     UserProfileUpdateAPIView,
 )
+from apps.orders.views import (
+    AddressListCreateAPIView,
+    AddressRetrieveUpdateDestroyAPIView,
+)
 
 urlpatterns = [
     path("send-otp/", SendOtpAPIView.as_view(), name="send-otp"),
@@ -18,4 +22,10 @@ urlpatterns = [
     path("me/", MeAPIView.as_view(), name="me"),
     path("balance/", BalanceAPIView.as_view(), name="balance"),
     path("me/update/", UserProfileUpdateAPIView.as_view(), name="me-update"),
+    path("addresses/", AddressListCreateAPIView.as_view(), name="address-list"),
+    path(
+        "addresses/<int:pk>/",
+        AddressRetrieveUpdateDestroyAPIView.as_view(),
+        name="address-detail",
+    ),
 ]

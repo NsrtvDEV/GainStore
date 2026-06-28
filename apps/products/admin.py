@@ -6,7 +6,7 @@ from .models import Category, Product, ProductImage, Review, Like
 
 @admin.register(Category)
 class CategoryAdmin(ModelAdmin):
-    list_display = ("id","name", "slug", "parent")
+    list_display = ("id", "name", "slug", "parent")
     search_fields = ("name", "slug")
     ordering = ("name",)
 
@@ -63,14 +63,14 @@ class ProductAdmin(ModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ModelAdmin):
-    list_display = ("id","product", "url", "is_main", "sort_order")
+    list_display = ("id", "product", "url", "is_main", "sort_order")
     list_filter = ("is_main",)
     search_fields = ("product__name",)
 
 
 @admin.register(Review)
 class ReviewAdmin(ModelAdmin):
-    list_display = ("id","product", "user", "rating", "created_at")
+    list_display = ("id", "product", "user", "rating", "created_at")
     list_filter = ("rating",)
     search_fields = ("product__name", "user__phone")
     ordering = ("-created_at",)
@@ -79,7 +79,6 @@ class ReviewAdmin(ModelAdmin):
 
 @admin.register(Like)
 class LikeAdmin(ModelAdmin):
-    list_display = ("id","user", "product", "created_at")
+    list_display = ("id", "user", "product", "created_at")
     search_fields = ("user__phone", "product__name")
     ordering = ("-created_at",)
-

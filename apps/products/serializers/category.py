@@ -2,7 +2,9 @@ from rest_framework.serializers import (
     ModelSerializer,
     SerializerMethodField,
     PrimaryKeyRelatedField,
+    DictField,
 )
+from drf_spectacular.utils import extend_schema_field
 
 from apps.products.models import Category
 
@@ -26,6 +28,7 @@ class CategoryDetailSerializer(ModelSerializer):
 
     parent = SerializerMethodField()
 
+    @extend_schema_field(DictField())
     def get_parent(self, obj):
         if obj.parent:
             return {"id": obj.parent.id, "name": obj.parent.name}
